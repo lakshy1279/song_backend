@@ -41,7 +41,8 @@ app.post("/upload", (req, res) => {
     language,
     video,
   });
-  Post.save()
+  song_details
+    .save()
     .then((result) => {
       res.json({ post: result });
     })
