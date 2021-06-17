@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const song_details = new mongoose.Schema({
+const songSchema = new mongoose.Schema({
   movieName: {
     type: String,
     require: true,
@@ -22,4 +22,4 @@ const song_details = new mongoose.Schema({
     require: true,
   },
 });
-module.exports = mongoose.model("song_details", song_details);
+module.exports = mongoose.model("Song", songSchema);

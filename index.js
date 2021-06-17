@@ -3,15 +3,14 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const PORT = process.env.PORT || 5000;
-const post = require("./model/song_details");
-const song_details = require("./model/song_details");
+const posts = require("./model/posts");
 
 app.use(cors());
 app.use(express.urlencoded());
 app.use(express.json());
 
 mongoose.connect(
-  "mongodb+srv://anshita:pipdIq5fqHCYrgO7@cluster0.adtj0.mongodb.net/codeial_production?retryWrites=true&w=majority",
+  " mongodb+srv://anshita:pipdIq5fqHCYrgO7@cluster0.adtj0.mongodb.net/codeial_production?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -19,10 +18,10 @@ mongoose.connect(
 );
 
 app.get("/", (req, res) => {
-  song_details
+  posts
     .find()
     .then((posts) => {
-      res.json({ posts });
+      return res.json({ posts });
     })
     .catch((err) => {
       console.log(err);
@@ -34,15 +33,14 @@ app.post("/upload", (req, res) => {
   if (!movieName || !releaseDate || !thumbnail || !language || !video) {
     return res.status(422).json({ error: "please prvide all filed" });
   }
-  const song_details = new song_details({
+  const Posts = new posts({
     movieName,
     releaseDate,
     thumbnail,
     language,
     video,
   });
-  song_details
-    .save()
+  Posts.save()
     .then((result) => {
       res.json({ post: result });
     })
