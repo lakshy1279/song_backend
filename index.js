@@ -3,7 +3,8 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const PORT = process.env.PORT || 5000;
-const post = require("./model/post");
+const post = require("./model/song_details");
+const song_details = require("./model/song_details");
 
 app.use(cors());
 app.use(express.urlencoded());
@@ -18,7 +19,7 @@ mongoose.connect(
 );
 
 app.get("/", (req, res) => {
-  post
+  song_details
     .find()
     .then((posts) => {
       res.json({ posts });
@@ -33,7 +34,7 @@ app.post("/upload", (req, res) => {
   if (!movieName || !releaseDate || !thumbnail || !language || !video) {
     return res.status(422).json({ error: "please prvide all filed" });
   }
-  const Post = new post({
+  const song_details = new song_details({
     movieName,
     releaseDate,
     thumbnail,
